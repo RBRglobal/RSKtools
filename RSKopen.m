@@ -24,14 +24,17 @@ RSK.datasets = mksqlite('select * from datasets');
 RSK.datasetDeployments = mksqlite('select * from datasetDeployments');
 
 try
-RSK.calibrations = mksqlite('select * from calibrations');
+    RSK.calibrations = mksqlite('select * from calibrations');
 catch % ignore if there is an error, rsk files from an easyparse logger  do not contain calibrations
 end
 
 RSK.instruments = mksqlite('select * from instruments');
-RSK.instrumentChannels = mksqlite('select * from instrumentChannels');
 try
-RSK.instrumentSensors = mksqlite('select * from instrumentSensors');
+    RSK.instrumentChannels = mksqlite('select * from instrumentChannels');
+catch
+end
+try
+    RSK.instrumentSensors = mksqlite('select * from instrumentSensors');
 catch % ignore if there is an error, rsk files from an easyparse logger do not contain instrument sensors table
 end
 
@@ -44,7 +47,10 @@ RSK.epochs.endTime = RSKtime2datenum(RSK.epochs.endTime);
 RSK.schedules = mksqlite('select * from schedules');
 
 
-RSK.appSettings = mksqlite('select * from appSettings');
+try
+    RSK.appSettings = mksqlite('select * from appSettings');
+catch
+end
 RSK.deployments = mksqlite('select * from deployments');
 
 RSK.thumbnailData = RSKreadthumbnail;
