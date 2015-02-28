@@ -10,11 +10,11 @@
 % library.  We have included a couple of versions here for Windows (32 bit/ 64 bit), Linux (64 bit)
 % and Mac (64 bit), but you might need to compile another version.  The
 % mksqlite-src directory contains everything you need and some instructions
-% from the original author.  You can salso find the source through Google.
+% from the original author.  You can also find the source through Google.
 %
 % 2.  Opening an RSK.  Use "RSKopen" with a filename as argument:
 %
-% >> RSK=RSKopen('sample.rsk');  
+% RSK=RSKopen('sample.rsk');  
 %
 % This generates an RSK structure with all the metadata from the database, 
 % and a thumbnail of the data, but without slurping in a massive amount of 
@@ -23,14 +23,15 @@
 % 3.  Plot the thumbnail data from the RSK that gives you an overview of
 % the dataset:
 %
-% >> RSKplotthumbnail(RSK) 
+% RSKplotthumbnail(RSK) 
+% 
 % This is usually a plot of about 4000 points.  Each time value has a max
 % and a min data value so that all spikes are visible even though the 
-% dataset is down sampled)
+% dataset is down-sampled
 %
 % 4.  Use RSKreaddata to read a block of data from the database on disk
 %
-% >> RSK=RSKreaddata(RSK,<starttime>,<endtime>); 
+% RSK=RSKreaddata(RSK,<starttime>,<endtime>); 
 %
 % This reads a portion of the 'data' table into the RSK structure 
 % (replacing any previous data that was read this way).  The <starttime> 

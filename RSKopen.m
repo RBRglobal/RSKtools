@@ -1,12 +1,40 @@
-function [RSK,dbid] = RSKopen(fname)
-% assumes only a single instrument deployment in RSK
-
-% modified 11/August/2014 avoid raising an error when reading calibration
-% and instrument sensors table from an rsk file.
-% modified 3/February/2014
-%   added uigetfile call if filename not specified on command line
-% modified 21/March/2013
-%   added error message if file does not exist
+function [RSK, dbid] = RSKopen(fname)
+% RSKOPEN - Opens an RBR RSK file and reads metadata and thumbnails.
+%
+% Syntax:  [RSK, dbid] = RSKopen(fname)
+% 
+% RSKopen makes a connection to an RSK (sqlite format) database as
+% obtained from an RBR logger and reads in the instrument metadata as
+% well as a thumbnail of the stored data. RSKopen assumes only a
+% single instrument deployment is contained in the RSK file. The
+% thumbnail usually contains about 4000 points, and thus avoids
+% reading large amounts of data that can be contained in the
+% database. Each time value has a maximum and a minimum data value so
+% that all spikes are visible even though the dataset is down-sampled.
+%
+% RSKopen requires a working mksqlite library. We have included a
+% couple of versions here for Windows (32/64 bit), Linux (64 bit) and
+% Mac (64 bit), but you might need to compile another version.  The
+% mksqlite-src directory contains everything you need and some
+% instructions from the original author.  You can also find the source
+% through Google.
+%
+% Inputs:
+%    fname - filename of the RSK file
+%
+% Outputs:
+%    RSK - Structure containing the logger metadata and thumbnails
+%    dbid - database id returned from mksqlite
+%
+% Example: 
+%    RSK=RSKopen('sample.rsk');  
+%
+% See also: RSKplotthumbnail, RSKreaddata, RSKreadevents, RSKreadburstdata
+%
+% Author: RBR Global Inc. Ottawa ON, Canada
+% email: info@rbr-global.com
+% Website: http://www.rbr-global.com
+% Last revision: 2015-02-27
 
 if nargin==0
     fname=uigetfile({'*.rsk','*.RSK'},'Choose an RSK file');
