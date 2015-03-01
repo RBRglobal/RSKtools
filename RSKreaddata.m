@@ -1,8 +1,40 @@
-function RSK = RSKreaddata(RSK,t1,t2)
+function RSK = RSKreaddata(RSK, t1, t2)
 
-% modified 20/March/2013 
-% -- improve handling when no data is found in interval
-% -- permit only one argument, then ALL data is read (caveat emptor)
+% RSKREADDATA - Reads the data tables from an RBR RSK SQLite file.
+%
+% Syntax:  RSK = RSKreaddata(RSK, t1, t2)
+% 
+% Reads the actual data tables from the RSK file previously opened
+% with RSKopen(). Will either read the entire data structre, or a
+% specified subset. 
+% 
+% Inputs: 
+%    RSK - Structure containing the logger metadata and thumbnails
+%          returned by RSKopen. If provided as the only argument the
+%          data for the entire file is read. Depending on the amount
+%          of data in your dataset, and the amount of memory in your
+%          computer, you can read bigger or smaller chunks before
+%          Matlab will complain and run out of memory.
+%     t1 - Optional start time for range of data to be read,
+%          specified using the MATLAB datenum format.
+%     t2 - Optional end time for range of data to be read,
+%          specified using the MATLAB datenum format.
+%
+% Outputs:
+%    RSK - Structure containing the logger metadata, along with the
+%          added 'data' fields. Note that this replaces any
+%          previous data that was read this way.
+%
+% Example: 
+%    RSK = RSKopen('sample.rsk');  
+%    RSK = RSKreaddata(RSK);
+%
+% See also: RSKopen, RSKreadevents, RSKreadburstdata
+%
+% Author: RBR Global Inc. Ottawa ON, Canada
+% email: info@rbr-global.com
+% Website: http://www.rbr-global.com
+% Last revision: 2013-03-20
 
 if nargin==1 % user wants to read ALL the data
     t1 = datenum2RSKtime(RSK.epochs.startTime);

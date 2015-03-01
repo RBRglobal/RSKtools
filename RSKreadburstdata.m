@@ -1,7 +1,43 @@
-function RSK = RSKreadburstdata(RSK,t1,t2)
-% reads burst data from the SQLite file.  Use
-% in conjunction with RSKreadevents to separate bursts
+function RSK = RSKreadburstdata(RSK, t1, t2)
 
+% RSKREADBURSTDATA - Reads the burst data tables from an RBR RSK
+%                    SQLite file. Use with RSKreadevents to
+%                    separate bursts.
+%
+% Syntax:  RSK = RSKreadburstdata(RSK, t1, t2)
+% 
+% Reads the burst data tables from the RSK file previously opened with
+% RSKopen(). Will either read the entire burst data structre, or a
+% specified subset. Use in conjunction with RSKreadevents to
+% separate bursts.
+% 
+% Inputs: 
+%    RSK - Structure containing the logger metadata and thumbnails
+%          returned by RSKopen. If provided as the only argument the
+%          burst data for the entire file is read. Depending on the
+%          amount of data in your dataset, and the amount of memory in
+%          your computer, you can read bigger or smaller chunks before
+%          Matlab will complain and run out of memory.
+%     t1 - Optional start time for range of data to be read,
+%          specified using the MATLAB datenum format.
+%     t2 - Optional end time for range of data to be read,
+%          specified using the MATLAB datenum format.
+%
+% Outputs:
+%    RSK - Structure containing the logger metadata, along with the
+%          added {FIXME:'burstdata'} fields. Note that this replaces
+%          any previous data that was read this way.
+%
+% Example: 
+%    RSK = RSKopen('sample.rsk');  
+%    RSK = RSKreadburstdata(RSK);
+%
+% See also: RSKopen, RSKreaddata, RSKreadevents
+%
+% Author: RBR Global Inc. Ottawa ON, Canada
+% email: info@rbr-global.com
+% Website: http://www.rbr-global.com
+% Last revision: 2013-03-20
 
 if nargin==1 % user wants to read ALL the data
     t1 = datenum2RSKtime(RSK.epochs.startTime);
