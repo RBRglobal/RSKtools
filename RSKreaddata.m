@@ -1,6 +1,6 @@
 function RSK = RSKreaddata(RSK, t1, t2)
 
-% RSKREADDATA - Reads the data tables from an RBR RSK SQLite file.
+% RSKreaddata - Reads the data tables from an RBR RSK SQLite file.
 %
 % Syntax:  RSK = RSKreaddata(RSK, t1, t2)
 % 

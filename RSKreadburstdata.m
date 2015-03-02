@@ -1,6 +1,6 @@
 function RSK = RSKreadburstdata(RSK, t1, t2)
 
-% RSKREADBURSTDATA - Reads the burst data tables from an RBR RSK
+% RSKreadburstdata - Reads the burst data tables from an RBR RSK
 %                    SQLite file. Use with RSKreadevents to
 %                    separate bursts.
 %

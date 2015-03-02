@@ -1,6 +1,6 @@
 function RSK = RSKreadevents(RSK, t1, t2)
 
-% RSKREADEVENTS - Reads the events from an RBR RSK SQLite file.
+% RSKreadevents - Reads the events from an RBR RSK SQLite file.
 %
 % Syntax:  RSK = RSKreadevents(RSK, t1, t2)
 % 

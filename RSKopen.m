@@ -1,5 +1,6 @@
 function [RSK, dbid] = RSKopen(fname)
-% RSKOPEN - Opens an RBR RSK file and reads metadata and thumbnails.
+
+% RSKopen - Opens an RBR RSK file and reads metadata and thumbnails.
 %
 % Syntax:  [RSK, dbid] = RSKopen(fname)
 % 

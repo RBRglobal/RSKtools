@@ -1,5 +1,31 @@
 function RSKplotdata(RSK)
-% plot data - needs time axis sorting
+
+% RSKplotdata - Plot summaries of logger data
+%
+% Syntax:  RSKplotdata(RSK)
+% 
+% This generates a plot, similar to the thumbnail plot, only using the
+% full 'data' that you read in, rather than just the thumbnail view.
+% It tries to be intelligent about the subplots and channel names, so
+% you can get an idea of how to do better processing.
+% 
+% Inputs:
+%    RSK - Structure containing the logger metadata and data
+%
+% Example: 
+%    RSK=RSKopen('sample.rsk');  
+%    RSK=RSKreaddata(RSK);  
+%    RSKplotdata(RSK);  
+%
+% See also: RSKplotthumbnail, RSKplotburstdata
+%
+% Author: RBR Global Inc. Ottawa ON, Canada
+% email: info@rbr-global.com
+% Website: http://www.rbr-global.com
+
+% FIXMEs:
+% * plot data - needs time axis sorting
+% * doesn't display the date if all data within one day :(
 
 if isfield(RSK,'data')==0
     disp('You must read a section of data in first!');
