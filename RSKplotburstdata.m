@@ -20,7 +20,7 @@ function RSKplotburstdata(RSK)
 % See also: RSKplotthumbnail, RSKplotdata, RSKreadburstdata
 %
 % Author: RBR Global Inc. Ottawa ON, Canada
-% email: info@rbr-global.com
+% email: support@rbr-global.com
 % Website: http://www.rbr-global.com
 
 % FIXMEs:

@@ -32,7 +32,7 @@ function RSK = RSKreaddata(RSK, t1, t2)
 % See also: RSKopen, RSKreadevents, RSKreadburstdata
 %
 % Author: RBR Global Inc. Ottawa ON, Canada
-% email: info@rbr-global.com
+% email: support@rbr-global.com
 % Website: http://www.rbr-global.com
 % Last revision: 2013-03-20
 

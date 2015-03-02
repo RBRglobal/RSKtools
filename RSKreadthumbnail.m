@@ -17,7 +17,7 @@ function results = RSKreadthumbnail
 % See also: RSKopen
 %
 % Author: RBR Global Inc. Ottawa ON, Canada
-% email: info@rbr-global.com
+% email: support@rbr-global.com
 % Website: http://www.rbr-global.com
 
 sql = ['select tstamp/1.0 as tstamp,* from thumbnailData order by tstamp'];

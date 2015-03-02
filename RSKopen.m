@@ -33,7 +33,7 @@ function [RSK, dbid] = RSKopen(fname)
 % See also: RSKplotthumbnail, RSKreaddata, RSKreadevents, RSKreadburstdata
 %
 % Author: RBR Global Inc. Ottawa ON, Canada
-% email: info@rbr-global.com
+% email: support@rbr-global.com
 % Website: http://www.rbr-global.com
 % Last revision: 2015-02-27
 
