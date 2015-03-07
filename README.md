@@ -1,4 +1,4 @@
-# README
+# RSKtools
 
 RSKtools is a simple Matlab toolbox to open RSK SQLite files generated
 by RBR instruments. This repository is for the development version of
@@ -22,9 +22,10 @@ RSKplotthumbnail(r);
 
 ## How do I get set up?
 
-* Unzip the archive (to "RSKtools", for instance)
-* Add the folder to your path inside matlab (`addpath RSKtools` or some nifty GUI thing)
-* `help RSKtools` to get an overview and take a look at the examples.
+* Unzip the archive (to `~/matlab/RSKtools`, for instance)
+* Add the folder to your path inside matlab (`addpath RSKtools` or
+  some nifty GUI thing)
+* type `help RSKtools` to get an overview and take a look at the examples.
 
 ## Contribution guidelines
 
