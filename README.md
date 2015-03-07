@@ -23,8 +23,8 @@ RSKplotthumbnail(r);
 ## How do I get set up?
 
 * Unzip the archive (to `~/matlab/RSKtools`, for instance)
-* Add the folder to your path inside matlab (`addpath RSKtools` or
-  some nifty GUI thing)
+* Add the folder to your path inside matlab (`addpath
+  ~/matlab/RSKtools` or some nifty GUI thing)
 * type `help RSKtools` to get an overview and take a look at the examples.
 
 ## Contribution guidelines
