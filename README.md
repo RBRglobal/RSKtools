@@ -32,9 +32,5 @@ RSKplotthumbnail(r);
 * Feel free to add improvements at any time:
   * by forking and sending a pull request
   * by emailing patches or changes to `support@rbr-global.com`
-* Write to `support@rbr-global.com` if you need a hand or would like
-  special recognition for an awesome addition
+* Write to `support@rbr-global.com` if you need help
 
-## Who wrote this?
-
-Well, Greg Johnson wrote the first few versions, and then Jean-Michel kicked in some patches, and now Clark Richards seems to be in charge ...
