@@ -28,18 +28,57 @@ function RSKplotprofiles(RSK, profileNum, field, direction)
 % Last revision: 2015-10-05
 
 if nargin == 1
-    profileNum = 1:min([length(RSK.profiles.upcast) length(RSK.profiles.downcast)]);
+    if ~isfield(RSK.profiles.downcast, 'data') error('No downcasts in RSK'); end
+    profileNum = 1:length(RSK.profiles.downcast.data);
     field = 'temperature';
-    direction = 'downcast';
+    direction = 'down';
 elseif nargin == 2
     field = 'temperature';
-    direction = 'downcast';
+    direction = 'down';
 elseif nargin == 3
-    direction = 'downcast';
+    direction = 'down';
 end
-if isempty(direction) direction = 'downcast'; end
+if isempty(direction) direction = 'down'; end
 if isempty(field) field = 'temperature'; end
-if isempty(profileNum) profileNum = 1:min([length(RSK.profiles.upcast) length(RSK.profiles.downcast)]); end
+if isempty(profileNum) 
+    if strcmp(direction, 'down')
+        if ~isfield(RSK.profiles.downcast, 'data')
+            error('No downcasts in RSK');
+        else 
+            profileNum = 1:length(RSK.profiles.downcast.data); 
+        end
+    elseif strcmp(direction, 'up')
+        if ~isfield(RSK.profiles.downcast, 'data')
+            error('No upcasts in RSK');
+        else 
+            profileNum = 1:length(RSK.profiles.upcast.data); 
+        end
+    elseif strcmp(direction, 'both')
+        if ~isfield(RSK.profiles.downcast, 'data')
+            error('No downcasts in RSK');
+        end
+        if ~isfield(RSK.profiles.upcast, 'data')
+            error('No upcasts in RSK');
+        end
+        profileNum = 1:min([length(RSK.profiles.upcast.data) length(RSK.profiles.downcast.data)]); 
+    end
+end
+if strcmp(direction, 'down')
+    if ~isfield(RSK.profiles.downcast, 'data')
+        error('No downcasts in RSK');
+    end
+elseif strcmp(direction, 'up')
+    if ~isfield(RSK.profiles.upcast, 'data')
+        error('No upcasts in RSK');
+    end
+elseif strcmp(direction, 'both')
+    if ~isfield(RSK.profiles.downcast, 'data')
+        error('No downcasts in RSK');
+    end
+    if ~isfield(RSK.profiles.upcast, 'data')
+        error('No upcasts in RSK');
+    end
+end    
 
 % find column number of field
 pcol = find(strncmp('pressure', lower({RSK.channels.longName}), 6));
@@ -48,17 +87,17 @@ col = find(strncmp(field, lower({RSK.channels.longName}), 6));
 clf
 hold on
 pmax = 0;
-if strcmp(direction, 'upcast') | strcmp(direction, 'both')
+if strcmp(direction, 'up') | strcmp(direction, 'both')
     for i=profileNum
-        p = RSK.profiles.upcast(i).values(:, pcol) - 10.1325; % FIXME: should read pAtm from rskfile
-        plot(RSK.profiles.upcast(i).values(:, col), p)
+        p = RSK.profiles.upcast.data(i).values(:, pcol) - 10.1325; % FIXME: should read pAtm from rskfile
+        plot(RSK.profiles.upcast.data(i).values(:, col), p)
         pmax = max([pmax; p]);
     end
 end
-if strcmp(direction, 'downcast') | strcmp(direction, 'both')
+if strcmp(direction, 'down') | strcmp(direction, 'both')
     for i=profileNum
-        p = RSK.profiles.downcast(i).values(:, pcol) - 10.1325; % FIXME: should read pAtm from rskfile
-        plot(RSK.profiles.downcast(i).values(:, col), p)
+        p = RSK.profiles.downcast.data(i).values(:, pcol) - 10.1325; % FIXME: should read pAtm from rskfile
+        plot(RSK.profiles.downcast.data(i).values(:, col), p)
         pmax = max([pmax; p]);
     end
 end
@@ -70,3 +109,10 @@ ylim([0 pmax])
 set(gca, 'ydir', 'reverse')
 ylabel('Sea pressure [dbar]')
 xlabel(xlab)
+if strcmp(direction, 'down')
+    title('Downcasts')
+elseif strcmp(direction, 'up')
+    title('Upcasts')
+elseif strcmp(direction, 'both')
+    title('Downcasts and Upcasts')
+end
