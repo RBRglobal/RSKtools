@@ -1,7 +1,8 @@
 % RSKTOOLS
-% version 1.3 11/Aug/2014
+% version 1.4 2015-10-06
 % 
 % History:
+% version 1.4 changes: add support for profile events and profile plotting
 % version 1.3 changes: compatible with RSK generated from an EasyParse (iOs format) logger
 % version 1.2 changes: added linux 64 bit mksqlite library
 % version 1.1 changes: added burst and event readers
@@ -59,9 +60,11 @@
 % User files
 %   RSKopen            - assumes only a single instrument deployment in RSK
 %   RSKreadthumbnail   - 
-%   RSKplotthumbnail   - plot data - needs time axis sorting
+%   RSKplotthumbnail   - plot data
 %   RSKreaddata        - 
 %   RSKplotdata        - plot data - needs time axis sorting
+%   RSKreadprofiles    - read profiles from events
+%   RSKplotprofiles    - plot profiles
 %   RSKreadburstdata   - 
 %   RSKplotburstdata   - plot burst data - needs time axis sorting
 %   RSKreadevents      
