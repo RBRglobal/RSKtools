@@ -93,25 +93,28 @@ events = tmp.events;
 nup = length(find(events.values(:,2) == 33));
 ndown = length(find(events.values(:,2) == 34));
 
-iup = find(events.values(:,2) == 33);
-idown = find(events.values(:,2) == 34);
-iend = find(events.values(:,2) == 35);
+if ~(nup == 0 & ndown == 0)
 
-% which is first?
-if (idown < iup) 
-    idownend = iend(1:2:end);
-    iupend = iend(2:2:end);
-else
-    idownend = iend(2:2:end);
-    iupend = iend(1:2:end);
+    iup = find(events.values(:,2) == 33);
+    idown = find(events.values(:,2) == 34);
+    iend = find(events.values(:,2) == 35);
+
+    % which is first?
+    if (idown < iup) 
+        idownend = iend(1:2:end);
+        iupend = iend(2:2:end);
+    else
+        idownend = iend(2:2:end);
+        iupend = iend(1:2:end);
+    end
+
+    RSK.profiles.downcast.istart = events.values(idown, 3);
+    RSK.profiles.downcast.iend = events.values(idownend, 3);
+    RSK.profiles.downcast.tstart = events.tstamp(idown);
+    RSK.profiles.downcast.tend = events.tstamp(idownend);
+    RSK.profiles.upcast.istart = events.values(iup, 3);
+    RSK.profiles.upcast.iend = events.values(iupend, 3);
+    RSK.profiles.upcast.tstart = events.tstamp(iup);
+    RSK.profiles.upcast.tend = events.tstamp(iupend);
+
 end
-
-RSK.profiles.downcast.istart = events.values(idown, 3);
-RSK.profiles.downcast.iend = events.values(idownend, 3);
-RSK.profiles.downcast.tstart = events.tstamp(idown);
-RSK.profiles.downcast.tend = events.tstamp(idownend);
-RSK.profiles.upcast.istart = events.values(iup, 3);
-RSK.profiles.upcast.iend = events.values(iupend, 3);
-RSK.profiles.upcast.tstart = events.tstamp(iup);
-RSK.profiles.upcast.tend = events.tstamp(iupend);
-

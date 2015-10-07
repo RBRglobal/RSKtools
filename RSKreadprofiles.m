@@ -44,6 +44,10 @@ function RSK = RSKreadprofiles(RSK, profileNum, direction)
 % Website: http://www.rbr-global.com
 % Last revision: 2015-10-05
 
+if ~isfield(RSK, 'profiles') 
+    error('No profiles events in this RSK');
+end
+
 if nargin == 1
     profileNum = 1:length(RSK.profiles.downcast.tstart); % default read all profiles
     direction = 'down'; % default read downcasts
