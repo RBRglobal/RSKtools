@@ -105,7 +105,7 @@ hold on
 pmax = 0;
 if strcmp(direction, 'up') | strcmp(direction, 'both')
     for i=profileNum
-        p = RSK.profiles.upcast.data(i).values(:, pcol) - 10.1325; % FIXME: should read pAtm from rskfile
+        p = RSK.profiles.upcast.data(i).values(:, pcol) - 10.1325; % FIXME: should read ptAm from rskfile
         plot(RSK.profiles.upcast.data(i).values(:, col), p)
         pmax = max([pmax; p]);
     end

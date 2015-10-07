@@ -69,14 +69,10 @@ ndown = length(profileNum);
 % initialize upcast and downcast structures
 downcast.data(ndown).tstamp = [];
 downcast.data(ndown).values = [];
-downcast.istart = RSK.profiles.downcast.istart;
-downcast.iend = RSK.profiles.downcast.iend;
 downcast.tstart = RSK.profiles.downcast.tstart;
 downcast.tend = RSK.profiles.downcast.tend;
 upcast.data(nup).tstamp = [];
 upcast.data(nup).values = [];
-upcast.istart = RSK.profiles.upcast.istart;
-upcast.iend = RSK.profiles.upcast.iend;
 upcast.tstart = RSK.profiles.upcast.tstart;
 upcast.tend = RSK.profiles.upcast.tend;
 
@@ -90,6 +86,8 @@ for i=profileNum
     downcast.data(ii).values = tmp.data.values;
     ii = ii + 1;
 end
+downcast.data.longName = tmp.data.longName;
+downcast.data.units = tmp.data.units;
 
 % loop through upcasts
 ii = 1;
@@ -101,6 +99,8 @@ for i=profileNum
     upcast.data(ii).values = tmp.data.values;
     ii = ii + 1;
 end
+upcast.data.longName = tmp.data.longName;
+upcast.data.units = tmp.data.units;
 
 if strcmp(direction, 'both')
     RSK.profiles.upcast = upcast;

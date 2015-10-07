@@ -56,5 +56,19 @@ results = RSKarrangedata(results);
 t=results.tstamp';
 results.tstamp = RSKtime2datenum(t); % convert RSK millis time to datenum
 
-RSK.data=results;
+% Does the RSK have all 3 of conductivity, temperature, and pressure?
+% If so, calculate practical salinity using TEOS-10 (if it exists)
+hasTEOS = exist('gsw_SP_from_C') == 2;
+hasCTP = strcmp(RSK.channels(1).longName, 'Conductivity') & strcmp(RSK.channels(2).longName, 'Temperature') & strcmp(RSK.channels(3).longName, 'Pressure');
 
+if hasTEOS & hasCTP % FIXME: only add salinity if it's not already there
+    nchannels = length(RSK.channels);
+    RSK.channels(nchannels+1).longName = 'Salinity';
+    RSK.channels(nchannels+1).units = 'PSU';
+    results.longName = {RSK.channels.longName};
+    results.units = {RSK.channels.units};
+    salinity = gsw_SP_from_C(results.values(:, 1), results.values(:, 2), results.values(:, 3) - 10.1325); % FIXME: use proper pAtm
+    results.values = [results.values salinity];
+end
+
+RSK.data=results;

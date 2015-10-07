@@ -68,6 +68,12 @@ catch % ignore if there is an error, rsk files from an easyparse logger do not c
 end
 
 RSK.channels = mksqlite('select longName,units from channels');
+% remove derived channel names (because the data aren't there anyway)
+isMeasured = mksqlite('select isMeasured from channels');
+isMeasured = [isMeasured.isMeasured];
+for c = length(isMeasured):-1:1
+    if ~isMeasured(c) RSK.channels(c) = []; end
+end
 
 RSK.epochs = mksqlite('select deploymentID,startTime/1.0 as startTime, endTime/1.0 as endTime from epochs');
 RSK.epochs.startTime = RSKtime2datenum(RSK.epochs.startTime);
@@ -108,12 +114,8 @@ if ~(nup == 0 & ndown == 0)
         iupend = iend(1:2:end);
     end
 
-    RSK.profiles.downcast.istart = events.values(idown, 3);
-    RSK.profiles.downcast.iend = events.values(idownend, 3);
     RSK.profiles.downcast.tstart = events.tstamp(idown);
     RSK.profiles.downcast.tend = events.tstamp(idownend);
-    RSK.profiles.upcast.istart = events.values(iup, 3);
-    RSK.profiles.upcast.iend = events.values(iupend, 3);
     RSK.profiles.upcast.tstart = events.tstamp(iup);
     RSK.profiles.upcast.tend = events.tstamp(iupend);
 
