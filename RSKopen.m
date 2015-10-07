@@ -35,7 +35,7 @@ function [RSK, dbid] = RSKopen(fname)
 % Author: RBR Global Inc. Ottawa ON, Canada
 % email: support@rbr-global.com
 % Website: http://www.rbr-global.com
-% Last revision: 2015-02-27
+% Last revision: 2015-10-06
 
 if nargin==0
     fname=uigetfile({'*.rsk','*.RSK'},'Choose an RSK file');

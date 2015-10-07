@@ -35,14 +35,20 @@ function RSK = RSKreadprofiles(RSK, profileNum, direction)
 %
 % Examples:
 %
-%    
+%    rsk = RSKopen('profiles.rsk');
 %
-% See also: RSKreaddata, RSKreadevents
+%    % read all profiles
+%    rsk = RSKreadprofiles(rsk);
+%
+%    % read selective upcasts
+%    rsk = RSKreadprofiles(rsk, [1 3 10], 'up');
+%
+% See also: RSKreaddata, RSKreadevents, RSKplotprofiles
 %
 % Author: RBR Global Inc. Ottawa ON, Canada
 % email: support@rbr-global.com
 % Website: http://www.rbr-global.com
-% Last revision: 2015-10-05
+% Last revision: 2015-10-06
 
 if ~isfield(RSK, 'profiles') 
     error('No profiles events in this RSK');

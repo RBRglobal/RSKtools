@@ -20,12 +20,28 @@ function RSKplotprofiles(RSK, profileNum, field, direction)
 %    direction - `up` for upcast, `down` for downcast, or `both` for
 %          all. Default is `both
 %
-% See also: RSKextractprofiles, RSKreaddata, RSKreadevents
+% Examples:
+%
+%    rsk = RSKopen('profiles.rsk');
+%
+%    % read all profiles
+%    rsk = RSKreadprofiles(rsk);
+%
+%    % plot all profiles
+%    RSKplotprofiles(rsk);
+%
+%    % plot selective downcasts
+%    RSKplotprofiles(rsk, [1 5 10]);
+%
+%    % plot conductivity for selective downcasts
+%    RSKplotprofiles(rsk, [1 5 10], 'conductivity');
+%
+% See also: RSKreadprofiles, RSKreaddata, RSKreadevents
 %
 % Author: RBR Global Inc. Ottawa ON, Canada
 % email: support@rbr-global.com
 % Website: http://www.rbr-global.com
-% Last revision: 2015-10-05
+% Last revision: 2015-10-06
 
 if nargin == 1
     if ~isfield(RSK.profiles.downcast, 'data') error('No downcasts in RSK'); end
