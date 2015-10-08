@@ -98,8 +98,8 @@ elseif strcmp(direction, 'both')
 end    
 
 % find column number of field
-pcol = find(strncmp('pressure', lower({RSK.channels.longName}), 6));
-col = find(strncmp(field, lower({RSK.channels.longName}), 6));
+pcol = find(strncmp('pressure', lower({RSK.channels.longName}), 4));
+col = find(strncmp(field, lower({RSK.channels.longName}), 4));
 
 hold on
 pmax = 0;
