@@ -2,6 +2,7 @@ write up a manual with examples and plots | id:13779bd79588b289d31c6012083525340
 add function for CT shift e.g. salcor | id:53bac432018c2dd769c8c02f87f92276ce7de01b
 new text export read utility | id:5756b3afd6401fc0bf661a8d8cb0bb98af4407f2
 add RSKdetectcasts and use to populate profiles metadata | id:86986b316578092e391444fe17373db8573bdd7b
-need to read atmospheric pressure from rsk | id:ad55374ecdfde8a361df8e686a7799c09d4a73bd
+need to read atmospheric pressure (and other params) from rsk | id:ad55374ecdfde8a361df8e686a7799c09d4a73bd
 remove atmospheric pressure from rsk using other series | id:b5be0b1aea20245491fe26f2f19cc6fa87b35e22
+get easyParse working properly | id:d487f3f1288c4ed759c396476731b1a2d698646a
 clean up colors etc for profile plots | id:e67e6768fb80e1d4f9a448a25d293e1113237355

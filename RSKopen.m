@@ -69,8 +69,10 @@ end
 
 RSK.channels = mksqlite('select longName,units from channels');
 % remove derived channel names (because the data aren't there anyway)
-isMeasured = mksqlite('select isMeasured from channels');
-isMeasured = [isMeasured.isMeasured];
+% isMeasured = mksqlite('select isMeasured from channels');
+% isMeasured = [isMeasured.isMeasured];
+isDerived = mksqlite('select isDerived from channels');
+isMeasured = ~[isDerived.isDerived];
 for c = length(isMeasured):-1:1
     if ~isMeasured(c) RSK.channels(c) = []; end
 end
