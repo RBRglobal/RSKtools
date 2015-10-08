@@ -101,7 +101,6 @@ end
 pcol = find(strncmp('pressure', lower({RSK.channels.longName}), 6));
 col = find(strncmp(field, lower({RSK.channels.longName}), 6));
 
-clf
 hold on
 pmax = 0;
 if strcmp(direction, 'up') | strcmp(direction, 'both')
@@ -111,6 +110,7 @@ if strcmp(direction, 'up') | strcmp(direction, 'both')
         pmax = max([pmax; p]);
     end
 end
+if strcmp(direction, 'both') ax = gca; ax.ColorOrderIndex = 1; end
 if strcmp(direction, 'down') | strcmp(direction, 'both')
     for i=profileNum
         p = RSK.profiles.downcast.data(i).values(:, pcol) - 10.1325; % FIXME: should read pAtm from rskfile
@@ -118,7 +118,6 @@ if strcmp(direction, 'down') | strcmp(direction, 'both')
         pmax = max([pmax; p]);
     end
 end
-hold off
 grid
 
 xlab = [RSK.channels(col).longName ' [' RSK.channels(col).units, ']'];
@@ -133,3 +132,4 @@ elseif strcmp(direction, 'up')
 elseif strcmp(direction, 'both')
     title('Downcasts and Upcasts')
 end
+hold off
