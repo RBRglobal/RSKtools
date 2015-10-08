@@ -47,7 +47,7 @@ if ~exist(fname,'file')
 end
 dbid = mksqlite('open',fname);
 
-RSK.dbInfo = mksqlite('select version from dbInfo');
+RSK.dbInfo = mksqlite('select version,type from dbInfo');
 
 RSK.datasets = mksqlite('select * from datasets');
 RSK.datasetDeployments = mksqlite('select * from datasetDeployments');
@@ -69,12 +69,13 @@ end
 
 RSK.channels = mksqlite('select longName,units from channels');
 % remove derived channel names (because the data aren't there anyway)
-% isMeasured = mksqlite('select isMeasured from channels');
-% isMeasured = [isMeasured.isMeasured];
-isDerived = mksqlite('select isDerived from channels');
-isMeasured = ~[isDerived.isDerived];
-for c = length(isMeasured):-1:1
-    if ~isMeasured(c) RSK.channels(c) = []; end
+% but only do this if it's NOT an EP format rsk
+if ~strncmp(RSK.dbInfo.type, 'EP', 2)
+    isDerived = mksqlite('select isDerived from channels');
+    isMeasured = ~[isDerived.isDerived];
+    for c = length(isMeasured):-1:1
+        if ~isMeasured(c) RSK.channels(c) = []; end
+    end
 end
 
 RSK.epochs = mksqlite('select deploymentID,startTime/1.0 as startTime, endTime/1.0 as endTime from epochs');
