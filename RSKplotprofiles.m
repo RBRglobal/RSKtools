@@ -1,8 +1,9 @@
 function RSKplotprofiles(RSK, profileNum, field, direction)
 
-% RSKprofiles - 
+% RSKplotprofiles - plots profiles from an RSK object, based on upcast
+%                   and downcast events
 %
-% Syntax:  RSK = RSKplotprofiles(RSK, direction, field, profileNum)
+% Syntax:  RSKplotprofiles(RSK, profileNum, field, direction)
 % 
 % Plots profiles from automatically detected casts. If called with one
 % argument, will default to plotting downcasts of temperature for all

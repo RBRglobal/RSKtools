@@ -63,10 +63,13 @@ hasCTP = strcmp(RSK.channels(1).longName, 'Conductivity') & strcmp(RSK.channels(
 
 if hasTEOS & hasCTP % FIXME: only add salinity if it's not already there
     nchannels = length(RSK.channels);
-    RSK.channels(nchannels+1).longName = 'Salinity';
-    RSK.channels(nchannels+1).units = 'PSU';
-    results.longName = {RSK.channels.longName};
-    results.units = {RSK.channels.units};
+    % does the RSK already have a salinity channel?
+    if sum(strcmp({RSK.channels.longName}, 'Salinity')) == 0
+        RSK.channels(nchannels+1).longName = 'Salinity';
+        RSK.channels(nchannels+1).units = 'PSU';
+        results.longName = {RSK.channels.longName};
+        results.units = {RSK.channels.units};
+    end
     salinity = gsw_SP_from_C(results.values(:, 1), results.values(:, 2), results.values(:, 3) - 10.1325); % FIXME: use proper pAtm
     results.values = [results.values salinity];
 end

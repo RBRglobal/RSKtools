@@ -67,46 +67,35 @@ nup = length(profileNum);
 ndown = length(profileNum);
     
 % initialize upcast and downcast structures
-downcast.data(ndown).tstamp = [];
-downcast.data(ndown).values = [];
-downcast.tstart = RSK.profiles.downcast.tstart;
-downcast.tend = RSK.profiles.downcast.tend;
-upcast.data(nup).tstamp = [];
-upcast.data(nup).values = [];
-upcast.tstart = RSK.profiles.upcast.tstart;
-upcast.tend = RSK.profiles.upcast.tend;
+RSK.profiles.downcast.data(ndown).tstamp = [];
+RSK.profiles.downcast.data(ndown).values = [];
+RSK.profiles.upcast.data(nup).tstamp = [];
+RSK.profiles.upcast.data(nup).values = [];
 
+if strcmp(direction, 'down') | strcmp(direction, 'both')
 % loop through downcasts
-ii = 1;
-for i=profileNum
-    tstart = RSK.profiles.downcast.tstart(i);
-    tend = RSK.profiles.downcast.tend(i);
-    tmp = RSKreaddata(RSK, tstart, tend);
-    downcast.data(ii).tstamp = tmp.data.tstamp;
-    downcast.data(ii).values = tmp.data.values;
-    ii = ii + 1;
+    ii = 1;
+    for i=profileNum
+        tstart = RSK.profiles.downcast.tstart(i);
+        tend = RSK.profiles.downcast.tend(i);
+        tmp = RSKreaddata(RSK, tstart, tend);
+        RSK.profiles.downcast.data(ii).tstamp = tmp.data.tstamp;
+        RSK.profiles.downcast.data(ii).values = tmp.data.values;
+        ii = ii + 1;
+    end
+    RSK.channels = tmp.channels;
 end
-downcast.data.longName = tmp.data.longName;
-downcast.data.units = tmp.data.units;
 
+if strcmp(direction, 'up') | strcmp(direction, 'both')
 % loop through upcasts
-ii = 1;
-for i=profileNum
-    tstart = RSK.profiles.upcast.tstart(i);
-    tend = RSK.profiles.upcast.tend(i);
-    tmp = RSKreaddata(RSK, tstart, tend);
-    upcast.data(ii).tstamp = tmp.data.tstamp;
-    upcast.data(ii).values = tmp.data.values;
-    ii = ii + 1;
-end
-upcast.data.longName = tmp.data.longName;
-upcast.data.units = tmp.data.units;
-
-if strcmp(direction, 'both')
-    RSK.profiles.upcast = upcast;
-    RSK.profiles.downcast = downcast;
-elseif strcmp(direction, 'down')
-    RSK.profiles.downcast = downcast;
-elseif strcmp(direction, 'up')
-    RSK.profiles.upcast = upcast;
+    ii = 1;
+    for i=profileNum
+        tstart = RSK.profiles.upcast.tstart(i);
+        tend = RSK.profiles.upcast.tend(i);
+        tmp = RSKreaddata(RSK, tstart, tend);
+        RSK.profiles.upcast.data(ii).tstamp = tmp.data.tstamp;
+        RSK.profiles.upcast.data(ii).values = tmp.data.values;
+        ii = ii + 1;
+    end
+    RSK.channels = tmp.channels;
 end
