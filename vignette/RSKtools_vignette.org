@@ -4,10 +4,14 @@
 #+LATEX_HEADER: \usepackage[margin=1in]{geometry}
 
 * Introduction
+  <<sec:intro>>
 
-RBR instruments output data in an open database format known as SQLite. To facilitate direct access to the data in Matlab[TM], we created the =RSKtools= toolbox.
+RBR instruments output data in an open database format known as SQLite[fn:1]. To facilitate direct access to the data in Matlab[TM], we created the =RSKtools= toolbox. =RSKtools= facilitates direct access to the data stored in =RSK= files by using the included =mksqlite= library, for which we have provided versions compiled for Windows (32/64bit), Linux (64bit) and Mac OSX (64bit). It may be necessary to compile your own version, using the source code provided at http://sourceforge.net/projects/mksqlite/. 
+
+=RSKtools= also provides some convenience functions for common data extraction (e.g. extracting profiles from a continuous dataset) and visualization (plotting individual profiles). For plans for future additions, see the [[sec:future][Future plans]] section.
 
 * Installing
+  <<sec:install>>
 
 The latest stable version of =RSKtools= can be found at [[kdjfkdjf][jkdgj]]
 
@@ -17,7 +21,7 @@ The latest stable version of =RSKtools= can be found at [[kdjfkdjf][jkdgj]]
 
   
 * Examples of use
-
+  <<sec:examples>>
 ** Loading files
 
 ** Working with profiles
@@ -42,3 +46,10 @@ ans = 'profiles.png';
 #+RESULTS:
 [[file:profiles.png]]
 
+
+* Future plans
+  <<sec:future>>
+
+
+
+[fn:1] http://www.sqlite.org/famous.html
