@@ -1,0 +1,44 @@
+#+TITLE: RSKtools for Matlab access to RBR data
+#+AUTHOR: Clark Richards, Phd \\ clark.richards@rbr-global.com
+#+OPTIONS: H:5 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+
+* Introduction
+
+RBR instruments output data in an open database format known as SQLite. To facilitate direct access to the data in Matlab[TM], we created the =RSKtools= toolbox.
+
+* Installing
+
+The latest stable version of =RSKtools= can be found at [[kdjfkdjf][jkdgj]]
+
+  - Unzip the archive (to =~/matlab/RSKtools=, for instance)
+  - Add the folder to your path inside matlab (=addpath ~/matlab/RSKtools= or some nifty GUI thing)
+  - type =help RSKtools= to get an overview and take a look at the examples.
+
+  
+* Examples of use
+
+** Loading files
+
+** Working with profiles
+
+#+begin_src matlab :results file :exports both
+file = 'testfiles/065583_20140612_0739.rsk';
+rsk = RSKopen(file);
+
+%% load the first 10 profiles
+rsk = RSKreadprofiles(rsk, 1:10);
+
+%% plot the downcasts
+subplot(121)
+RSKplotprofiles(rsk, [], 'temperature', 'down')
+subplot(122)
+RSKplotprofiles(rsk, [], 'salinity', 'down')
+
+print -dpng profiles.png;
+ans = 'profiles.png';
+#+end_src
+
+#+RESULTS:
+[[file:profiles.png]]
+
