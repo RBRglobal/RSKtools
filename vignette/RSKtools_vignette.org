@@ -24,10 +24,59 @@ The latest stable version of =RSKtools= can be found at [[kdjfkdjf][jkdgj]]
   <<sec:examples>>
 ** Loading files
 
+To work with an RSK file using =RSKtools=, a connection to the database must be made. This is done using the =RSKopen()= function. Note that =RSKopen= doesn't actually read the data, but reads a /thumbnail/ of the data which is typically about 4000 points long. The structure returned after opening an RSK looks something like:
+
+#+begin_src matlab :results output :exports results
+file = '../testfiles/065583_20140612_0739.rsk';
+rsk = RSKopen(file);
+ans = rsk
+#+end_src
+
+#+RESULTS:
+#+begin_example
+ans = 
+
+                dbInfo: [1x1 struct]
+              datasets: [1x1 struct]
+    datasetDeployments: [1x1 struct]
+          calibrations: [5x1 struct]
+           instruments: [1x1 struct]
+    instrumentChannels: [5x1 struct]
+     instrumentSensors: []
+              channels: [3x1 struct]
+                epochs: [1x1 struct]
+             schedules: [1x1 struct]
+           appSettings: [1x1 struct]
+           deployments: [1x1 struct]
+         thumbnailData: [1x1 struct]
+              profiles: [1x1 struct]
+#+end_example
+
+Note the structure element called =thumbnailData=. In order to read the actual data, we use the =RSKreaddata()= function, which if given with one argument (the variable name of the RSK object) will read the entire data set. Because RSK files can store a large amount of data, it may be preferable to read a subset of the data, specified using a start and end time (in Matlab =datenum= format[fn:2]). 
+
+#+begin_example
+t1 = rsk.thumbnailData.tstamp(1) + 0.5; % half a day after start
+t2 = rsk.thumbnailData.tstamp(1) + 1.5; % 1.5 days after start
+rsk = RSKreaddata(rsk, t1, t2);
+#+end_example
+
+Note that the data structure can be found in the object at
+
+#+begin_example
+>> rsk.data        
+ans = 
+      tstamp: [442293x1 double]
+      values: [442293x4 double]
+    longName: {'Conductivity'  'Temperature'  'Pressure'  'Salinity'}
+       units: {'mS/cm'  '?C'  'dbar'  'PSU'}
+#+end_example
+
 ** Working with profiles
 
+Profiling loggers with recent versions of firmware contain the ability to automatically detect and log profile "events". These are denoted as "downcasts" and "upcasts", and the function =RSKreadprofiles()= can be used to extract individual profiles from the raw data, based on the previously identified events. Following this, quick plots of the profiles can be made using the =RSKplotprofiles()= function.
+
 #+begin_src matlab :results file :exports both
-file = 'testfiles/065583_20140612_0739.rsk';
+file = '../testfiles/065583_20140612_0739.rsk';
 rsk = RSKopen(file);
 
 %% load the first 10 profiles
@@ -53,3 +102,4 @@ ans = 'profiles.png';
 
 
 [fn:1] http://www.sqlite.org/famous.html
+[fn:2] The Matlab datenum is defined as the number of days since January 0, 0000.
