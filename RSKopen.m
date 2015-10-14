@@ -109,7 +109,7 @@ if ~(nup == 0 & ndown == 0)
     iend = find(events.values(:,2) == 35);
 
     % which is first?
-    if (idown < iup) 
+    if (idown(1) < iup(1)) 
         idownend = iend(1:2:end);
         iupend = iend(2:2:end);
     else

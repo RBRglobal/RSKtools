@@ -48,32 +48,30 @@ function RSK = RSKreadprofiles(RSK, profileNum, direction)
 % Author: RBR Global Inc. Ottawa ON, Canada
 % email: support@rbr-global.com
 % Website: http://www.rbr-global.com
-% Last revision: 2015-10-06
+% Last revision: 2015-10-14
 
 if ~isfield(RSK, 'profiles') 
     error('No profiles events in this RSK');
 end
 
 if nargin == 1
-    profileNum = 1:length(RSK.profiles.downcast.tstart); % default read all profiles
+    nprof = min([length(RSK.profiles.downcast.tstart) length(RSK.profiles.upcast.tstart)]);
+    profileNum = 1:nprof; % default read all profiles
     direction = 'down'; % default read downcasts
 elseif nargin == 2
     direction = 'down';
 end
-if isempty(profileNum) profileNum = 1:length(RSK.profiles.downcast.tstart); end
+nprof = min([length(RSK.profiles.downcast.tstart) length(RSK.profiles.upcast.tstart)]);
+if isempty(profileNum) profileNum = 1:nprof; end
 if isempty(direction) type = 'down'; end
 
 nup = length(profileNum);
 ndown = length(profileNum);
-    
-% initialize upcast and downcast structures
-RSK.profiles.downcast.data(ndown).tstamp = [];
-RSK.profiles.downcast.data(ndown).values = [];
-RSK.profiles.upcast.data(nup).tstamp = [];
-RSK.profiles.upcast.data(nup).values = [];
 
 if strcmp(direction, 'down') | strcmp(direction, 'both')
-% loop through downcasts
+    RSK.profiles.downcast.data(ndown).tstamp = [];
+    RSK.profiles.downcast.data(ndown).values = [];
+    % loop through downcasts
     ii = 1;
     for i=profileNum
         tstart = RSK.profiles.downcast.tstart(i);
@@ -87,7 +85,9 @@ if strcmp(direction, 'down') | strcmp(direction, 'both')
 end
 
 if strcmp(direction, 'up') | strcmp(direction, 'both')
-% loop through upcasts
+    RSK.profiles.upcast.data(nup).tstamp = [];
+    RSK.profiles.upcast.data(nup).values = [];
+    % loop through upcasts
     ii = 1;
     for i=profileNum
         tstart = RSK.profiles.upcast.tstart(i);

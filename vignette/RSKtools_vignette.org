@@ -13,7 +13,7 @@ RBR instruments output data in an open database format known as SQLite[fn:1]. To
 * Installing
   <<sec:install>>
 
-The latest stable version of =RSKtools= can be found at [[kdjfkdjf][jkdgj]]
+The latest stable version of =RSKtools= can be found at [[http://www.rbr-global.com/support/matlab-tools]].
 
   - Unzip the archive (to =~/matlab/RSKtools=, for instance)
   - Add the folder to your path inside matlab (=addpath ~/matlab/RSKtools= or some nifty GUI thing)
@@ -26,15 +26,14 @@ The latest stable version of =RSKtools= can be found at [[kdjfkdjf][jkdgj]]
 
 To work with an RSK file using =RSKtools=, a connection to the database must be made. This is done using the =RSKopen()= function. Note that =RSKopen= doesn't actually read the data, but reads a /thumbnail/ of the data which is typically about 4000 points long. The structure returned after opening an RSK looks something like:
 
-#+begin_src matlab :results output :exports results
+#+begin_src matlab :results output :exports both
 file = '../testfiles/065583_20140612_0739.rsk';
-rsk = RSKopen(file);
-ans = rsk
+rsk = RSKopen(file)
 #+end_src
 
 #+RESULTS:
 #+begin_example
-ans = 
+rsk = 
 
                 dbInfo: [1x1 struct]
               datasets: [1x1 struct]
@@ -73,7 +72,7 @@ ans =
 
 ** Working with profiles
 
-Profiling loggers with recent versions of firmware contain the ability to automatically detect and log profile "events". These are denoted as "downcasts" and "upcasts", and the function =RSKreadprofiles()= can be used to extract individual profiles from the raw data, based on the previously identified events. Following this, quick plots of the profiles can be made using the =RSKplotprofiles()= function.
+Profiling loggers with recent versions of firmware ( _FIXME: /which version??/_ ) contain the ability to automatically detect and log profile "events". These are denoted as "downcasts" and "upcasts", and the function =RSKreadprofiles()= can be used to extract individual profiles from the raw data, based on the previously identified events. Following this, quick plots of the profiles can be made using the =RSKplotprofiles()= function.
 
 #+begin_src matlab :results file :exports both
 file = '../testfiles/065583_20140612_0739.rsk';

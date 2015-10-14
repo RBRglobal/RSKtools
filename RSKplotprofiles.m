@@ -101,7 +101,9 @@ end
 pcol = find(strncmp('pressure', lower({RSK.channels.longName}), 4));
 col = find(strncmp(field, lower({RSK.channels.longName}), 4));
 
+clf
 hold on
+ax = gca; ax.ColorOrderIndex = 1;
 pmax = 0;
 if strcmp(direction, 'up') | strcmp(direction, 'both')
     for i=profileNum
