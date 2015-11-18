@@ -101,7 +101,7 @@ end
 pcol = find(strncmp('pressure', lower({RSK.channels.longName}), 4));
 col = find(strncmp(field, lower({RSK.channels.longName}), 4));
 
-clf
+% clf
 hold on
 ax = gca; ax.ColorOrderIndex = 1;
 pmax = 0;
