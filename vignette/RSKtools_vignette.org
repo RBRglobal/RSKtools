@@ -1,5 +1,5 @@
 #+TITLE: RSKtools for Matlab access to RBR data
-#+AUTHOR: Clark Richards, Phd \\ clark.richards@rbr-global.com
+#+AUTHOR: Clark Richards, PhD \\ clark.richards@rbr-global.com
 #+OPTIONS: H:5 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+LATEX_HEADER: \usepackage[margin=1in]{geometry}
 
@@ -33,6 +33,22 @@ rsk = RSKopen(file)
 
 #+RESULTS:
 #+begin_example
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2015 The MathWorks, Inc.
+                   R2015a (8.5.0.197613) 64-bit (maci64)
+                             February 12, 2015
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+>> >> mksqlite Version 1.12 build:34, an interface from MATLAB to SQLite
+(c) 2008-2011 by Martin Kortmann <mail@kortmann.de>
+based on SQLite Version 3.7.11 - http://www.sqlite.org
+UTF-8 extension: A.Martin, 2012-02-10, Volkswagen AG
+
+
 rsk = 
 
                 dbInfo: [1x1 struct]
@@ -49,6 +65,7 @@ rsk =
            deployments: [1x1 struct]
          thumbnailData: [1x1 struct]
               profiles: [1x1 struct]
+
 #+end_example
 
 Note the structure element called =thumbnailData=. In order to read the actual data, we use the =RSKreaddata()= function, which if given with one argument (the variable name of the RSK object) will read the entire data set. Because RSK files can store a large amount of data, it may be preferable to read a subset of the data, specified using a start and end time (in Matlab =datenum= format[fn:2]). 
