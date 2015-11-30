@@ -40,3 +40,23 @@ If the [TEOS-10](http://www.teos-10.org/software.htm) matlab toolbox is installe
   * by emailing patches or changes to `support@rbr-global.com`
 * Write to `support@rbr-global.com` if you need help
 
+## Changes
+
+* Version 1.4 (2015-11-30)
+
+- add support for profile events and profile plotting
+- supports TEOS-10 for calculation of salinity
+- improved documentation
+
+* Version 1.3
+
+- compatible with RSK generated from an EasyParse (iOs format) logger
+
+* Version 1.2
+
+- added linux 64 bit mksqlite library
+
+* Version 1.1
+
+- added burst and event readers
+
