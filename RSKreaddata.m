@@ -59,11 +59,15 @@ results.tstamp = RSKtime2datenum(t); % convert RSK millis time to datenum
 % Does the RSK have all 3 of conductivity, temperature, and pressure, but not salinity?
 % If so, calculate practical salinity using TEOS-10 (if it exists)
 hasTEOS = exist('gsw_SP_from_C') == 2;
-hasCTP = strcmp(RSK.channels(1).longName, 'Conductivity') & strcmp(RSK.channels(2).longName, 'Temperature') & strcmp(RSK.channels(3).longName, 'Pressure');
+nchannels = length(RSK.channels);
+if nchannels >= 3
+    hasCTP = strcmp(RSK.channels(1).longName, 'Conductivity') & strcmp(RSK.channels(2).longName, 'Temperature') & strcmp(RSK.channels(3).longName, 'Pressure');
+else 
+    hasCTP = 0;
+end
 hasS = any(strcmp({RSK.channels.longName}, 'Salinity'));
 
 if hasTEOS & hasCTP & ~hasS
-    nchannels = length(RSK.channels);
     % does the RSK already have a salinity channel?
     if sum(strcmp({RSK.channels.longName}, 'Salinity')) == 0
         RSK.channels(nchannels+1).longName = 'Salinity';
