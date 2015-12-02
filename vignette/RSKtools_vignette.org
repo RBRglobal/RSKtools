@@ -1,4 +1,4 @@
-#+TITLE: RSKtools for Matlab access to RBR data
+#+TITLE: RSKtools for Matlab access to RBR data (v1.4)
 #+AUTHOR: Clark Richards, PhD \\ clark.richards@rbr-global.com
 #+OPTIONS: H:5 num:t toc:t \n:nil @:t ::t |:t ^:nil -:t f:t *:t <:t
 #+LATEX_HEADER: \usepackage[margin=1in]{geometry}
@@ -87,9 +87,11 @@ ans =
        units: {'mS/cm'  '?C'  'dbar'  'PSU'}
 #+end_example
 
+In this example, because the instrument was determined to be a "CTD"-type instrument, a new channel was created called =Salinity= (using the Practical Salinity Scale). The salinity calculation is performed by the [[http://teos-10.org/software.htm][TEOS-10]] package, which can be obtained from http://teos-10.org/software.htm.
+
 ** Working with profiles
 
-Profiling loggers with recent versions of firmware ( _FIXME: /which version??/_ ) contain the ability to automatically detect and log profile "events". These are denoted as "downcasts" and "upcasts", and the function =RSKreadprofiles()= can be used to extract individual profiles from the raw data, based on the previously identified events. Following this, quick plots of the profiles can be made using the =RSKplotprofiles()= function.
+Profiling loggers with recent versions of firmware contain the ability to automatically detect and log profile "events". These are denoted as "downcasts" and "upcasts", and the function =RSKreadprofiles()= can be used to extract individual profiles from the raw data, based on the previously identified events. Following this, quick plots of the profiles can be made using the =RSKplotprofiles()= function.
 
 #+begin_src matlab :results file :exports both
 file = '../testfiles/065583_20140612_0739.rsk';
@@ -114,6 +116,14 @@ ans = 'profiles.png';
 
 * Future plans
   <<sec:future>>
+
+  - Cast detection for datasets without profile events
+  - Wave processing functions
+  - Improved data processing functions (e.g. for CTD data)
+
+* About this document
+
+This document was created using [[orgmode.org][org-mode]] for GNU Emacs, utilizing the org-babel functionality to include and execute code blocks as part of the document.
 
 
 
