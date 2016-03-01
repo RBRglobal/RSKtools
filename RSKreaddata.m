@@ -34,7 +34,7 @@ function RSK = RSKreaddata(RSK, t1, t2)
 % Author: RBR Global Inc. Ottawa ON, Canada
 % email: support@rbr-global.com
 % Website: http://www.rbr-global.com
-% Last revision: 2013-03-20
+% Last revision: 2016-03-01
 
 if nargin==1 % user wants to read ALL the data
     t1 = datenum2RSKtime(RSK.epochs.startTime);
@@ -50,6 +50,16 @@ if isempty(results)
     return
 end
 results = rmfield(results,'tstamp_1'); % get rid of the corrupted one
+
+%% RSK version >= 1.12.2 now has a datasetID column in the data table
+% Look for the presence of that column and extract it from results
+if sum(strcmp('datasetID', fieldnames(results))) > 0
+    datasetID = [results(:).datasetID]';
+    results = rmfield(results, 'datasetID'); % get rid of the datasetID column
+    hasdatasetID = 1;
+else 
+    hasdatasetID = 0;
+end
 
 results = RSKarrangedata(results);
 
@@ -79,4 +89,7 @@ if hasTEOS & hasCTP & ~hasS
     results.values = [results.values salinity];
 end
 
+if hasdatasetID
+    results.datasetID = datasetID;
+end
 RSK.data=results;
