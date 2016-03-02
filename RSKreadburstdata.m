@@ -54,10 +54,23 @@ if isempty(results)
 end
 results = rmfield(results,'tstamp_1'); % get rid of the corrupted one
 
+%% RSK version >= 1.12.2 now has a datasetID column in the data table
+% Look for the presence of that column and extract it from results
+if sum(strcmp('datasetID', fieldnames(results))) > 0
+    datasetID = [results(:).datasetID]';
+    results = rmfield(results, 'datasetID'); % get rid of the datasetID column
+    hasdatasetID = 1;
+else 
+    hasdatasetID = 0;
+end
+
 results = RSKarrangedata(results);
 
 t=results.tstamp';
 results.tstamp = RSKtime2datenum(t); % convert RSK millis time to datenum
 
+if hasdatasetID
+    results.datasetID = datasetID;
+end
 RSK.burstdata=results;
 
