@@ -19,6 +19,7 @@ function results = RSKreadthumbnail
 % Author: RBR Global Inc. Ottawa ON, Canada
 % email: support@rbr-global.com
 % Website: http://www.rbr-global.com
+% Last revision: 2016-03-02
 
 sql = ['select tstamp/1.0 as tstamp,* from thumbnailData order by tstamp'];
 results = mksqlite(sql);
