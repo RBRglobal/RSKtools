@@ -63,6 +63,10 @@ try
 catch
 end
 try
+    RSK.ranging = mksqlite('select * from ranging');
+catch
+end
+try
     RSK.instrumentSensors = mksqlite('select * from instrumentSensors');
 catch % ignore if there is an error, rsk files from an easyparse logger do not contain instrument sensors table
 end

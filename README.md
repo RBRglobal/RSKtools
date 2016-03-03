@@ -42,6 +42,11 @@ If the [TEOS-10](http://www.teos-10.org/software.htm) matlab toolbox is installe
 
 ## Changes
 
+* Version 1.4.1
+
+  - Fix bug reading data table for RSK version >= 1.12.2
+  - add info from `ranging` table to structure
+
 * Version 1.4 (2015-11-30)
 
   - add support for profile events and profile plotting
