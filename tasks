@@ -1,4 +1,3 @@
-write up a manual with examples and plots | id:13779bd79588b289d31c601208352534070255a8
 add function for CT shift e.g. salcor | id:53bac432018c2dd769c8c02f87f92276ce7de01b
 new text export read utility | id:5756b3afd6401fc0bf661a8d8cb0bb98af4407f2
 add RSKdetectcasts and use to populate profiles metadata | id:86986b316578092e391444fe17373db8573bdd7b
