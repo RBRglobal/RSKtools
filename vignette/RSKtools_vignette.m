@@ -96,4 +96,11 @@ RSKplotprofiles(rsk, [], 'salinity', 'down')
 %% About this document
 % This document was created using
 % <http://www.mathworks.com/help/matlab/matlab_prog/marking-up-matlab-comments-for-publishing.html
-% Matlab(TM) Markup Publishing>.
+% Matlab(TM) Markup Publishing>. To publish it as an HTML page, run the
+% command:
+%%
+% 
+%   publish('RSKtools_vignette.m');
+
+%%
+% See |help publish| for more document export options.

@@ -1,5 +1,6 @@
 auto/
 html/
+*.html
 *.png
 *.pdf
 *.tex
