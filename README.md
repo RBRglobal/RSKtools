@@ -18,7 +18,7 @@ r = RSKopen('sample.rsk');
 RSKplotthumbnail(r);
 ```
 
-* And lots of other stuff.  Read the Matlab help (by typing `help RSKtools`) once you've installed it!
+* And lots of other stuff.  Read the Matlab help (by typing `help RSKtools`) once you've installed it, or check out the vignette in the `vignette` directory.
 
 ## How do I get set up?
 
@@ -42,10 +42,11 @@ If the [TEOS-10](http://www.teos-10.org/software.htm) matlab toolbox is installe
 
 ## Changes
 
-* Version 1.4.1
+* Current Version (1.4.1)
 
   - Fix bug reading data table for RSK version >= 1.12.2
   - add info from `ranging` table to structure
+  - mfile vignette using Matlab markup
 
 * Version 1.4 (2015-11-30)
 
