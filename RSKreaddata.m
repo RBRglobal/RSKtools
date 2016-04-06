@@ -82,6 +82,11 @@ if hasTEOS & hasCTP & ~hasS
     if sum(strcmp({RSK.channels.longName}, 'Salinity')) == 0
         RSK.channels(nchannels+1).longName = 'Salinity';
         RSK.channels(nchannels+1).units = 'PSU';
+        % update the instrumentChannels info for the new "channel"
+        RSK.instrumentChannels(nchannels+1).serialID = RSK.instrumentChannels(1).serialID;
+        RSK.instrumentChannels(nchannels+1).channelID = RSK.instrumentChannels(nchannels).channelID+1;
+        RSK.instrumentChannels(nchannels+1).channelOrder = RSK.instrumentChannels(nchannels).channelOrder+1;
+        if ~strncmp(RSK.dbInfo.type, 'EP', 2) RSK.instrumentChannels(nchannels+1).channelStatus = 0; end
         results.longName = {RSK.channels.longName};
         results.units = {RSK.channels.units};
     end

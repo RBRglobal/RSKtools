@@ -79,6 +79,8 @@ if strcmp(direction, 'down') | strcmp(direction, 'both')
         tmp = RSKreaddata(RSK, tstart, tend);
         RSK.profiles.downcast.data(ii).tstamp = tmp.data.tstamp;
         RSK.profiles.downcast.data(ii).values = tmp.data.values;
+        % upddate instrumentsChannels fields
+        RSK.instrumentChannels = tmp.instrumentChannels;
         ii = ii + 1;
     end
     RSK.channels = tmp.channels;
@@ -95,6 +97,8 @@ if strcmp(direction, 'up') | strcmp(direction, 'both')
         tmp = RSKreaddata(RSK, tstart, tend);
         RSK.profiles.upcast.data(ii).tstamp = tmp.data.tstamp;
         RSK.profiles.upcast.data(ii).values = tmp.data.values;
+        % upddate instrumentsChannels fields
+        RSK.instrumentChannels = tmp.instrumentChannels;
         ii = ii + 1;
     end
     RSK.channels = tmp.channels;

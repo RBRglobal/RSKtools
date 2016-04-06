@@ -79,6 +79,7 @@ if ~strncmp(RSK.dbInfo.type, 'EP', 2)
     isMeasured = ~[isDerived.isDerived];
     for c = length(isMeasured):-1:1
         if ~isMeasured(c) RSK.channels(c) = []; end
+        if ~isMeasured(c) RSK.instrumentChannels(c) = []; end
     end
 end
 
