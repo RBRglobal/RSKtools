@@ -79,6 +79,7 @@ hasS = any(strcmp({RSK.channels.longName}, 'Salinity'));
 
 if hasTEOS & hasCTP & ~hasS
     % does the RSK already have a salinity channel?
+    % FIXME: need to check if salinity exists in the data struct also
     if sum(strcmp({RSK.channels.longName}, 'Salinity')) == 0
         RSK.channels(nchannels+1).longName = 'Salinity';
         RSK.channels(nchannels+1).units = 'PSU';
