@@ -3,7 +3,7 @@ function RSK = RSKreadprofiles(RSK, profileNum, direction, latency)
 % RSKreadprofiles - Read individual profiles (e.g. upcast and
 %                   downcast) from an rsk file.
 %
-% Syntax:  RSK = RSKreadprofiles(RSK, profileNum, direction)
+% Syntax:  RSK = RSKreadprofiles(RSK, profileNum, direction, latency)
 % 
 % Reads profiles, including up and down casts, from the events
 % contained in an rsk file. The profiles are written as fields in a
@@ -46,6 +46,9 @@ function RSK = RSKreadprofiles(RSK, profileNum, direction, latency)
 %
 %    % read selective upcasts
 %    rsk = RSKreadprofiles(rsk, [1 3 10], 'up');
+%
+%    % read all casts for a logger with 5 second latency
+%    rsk = RSKreadprofiles(rsk, [], [], 5);
 %
 % See also: RSKreaddata, RSKreadevents, RSKplotprofiles
 %
