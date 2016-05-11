@@ -102,29 +102,34 @@ RSK.thumbnailData = RSKreadthumbnail;
 % 
 % FIXME: what happens when there are no profile events? Should just skip this
 tmp = RSKreadevents(RSK);
-events = tmp.events;
+try
+    events = tmp.events;
+catch
+end
 
-nup = length(find(events.values(:,2) == 33));
-ndown = length(find(events.values(:,2) == 34));
-
-if ~(nup == 0 & ndown == 0)
-
-    iup = find(events.values(:,2) == 33);
-    idown = find(events.values(:,2) == 34);
-    iend = find(events.values(:,2) == 35);
-
-    % which is first?
-    if (idown(1) < iup(1)) 
-        idownend = iend(1:2:end);
-        iupend = iend(2:2:end);
-    else
-        idownend = iend(2:2:end);
-        iupend = iend(1:2:end);
+if exist('events', 'var')
+    nup = length(find(events.values(:,2) == 33));
+    ndown = length(find(events.values(:,2) == 34));
+    
+    if ~(nup == 0 & ndown == 0)
+        
+        iup = find(events.values(:,2) == 33);
+        idown = find(events.values(:,2) == 34);
+        iend = find(events.values(:,2) == 35);
+        
+        % which is first?
+        if (idown(1) < iup(1)) 
+            idownend = iend(1:2:end);
+            iupend = iend(2:2:end);
+        else
+            idownend = iend(2:2:end);
+            iupend = iend(1:2:end);
+        end
+        
+        RSK.profiles.downcast.tstart = events.tstamp(idown);
+        RSK.profiles.downcast.tend = events.tstamp(idownend);
+        RSK.profiles.upcast.tstart = events.tstamp(iup);
+        RSK.profiles.upcast.tend = events.tstamp(iupend);
+        
     end
-
-    RSK.profiles.downcast.tstart = events.tstamp(idown);
-    RSK.profiles.downcast.tend = events.tstamp(idownend);
-    RSK.profiles.upcast.tstart = events.tstamp(iup);
-    RSK.profiles.upcast.tend = events.tstamp(iupend);
-
 end
