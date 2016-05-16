@@ -1,0 +1,228 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>RSKtools for Matlab access to RBR data</title><meta name="generator" content="MATLAB 8.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-04-06"><meta name="DC.source" content="RSKtools_vignette.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>RSKtools for Matlab access to RBR data</h1><!--introduction--><p>Clark Richards, PhD; <a href="mailto:clark.richards@rbr-global.com">clark.richards@rbr-global.com</a>; RSKtools version 1.4; Updated 2016-04-05</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Introduction</a></li><li><a href="#2">Installing</a></li><li><a href="#3">Examples of use</a></li><li><a href="#7">Working with profiles</a></li><li><a href="#8">Future plans</a></li><li><a href="#9">About this document</a></li></ul></div><h2>Introduction<a name="1"></a></h2><p>RBR instruments output data in an open database format known as <a href="http://www.sqlite.org/famous.html">SQLite</a>. To facilitate direct access to the data in Matlab&#8482;, we created the <tt>RSKtools</tt> toolbox. <tt>RSKtools</tt> facilitates direct access to the data stored in <tt>RSK</tt> files by using the included <tt>mksqlite</tt> library, for which we have provided versions compiled for Windows (32/64bit), Linux (64bit) and Mac OSX (64bit). It may be necessary to compile your own version, using the source code provided at <a href="http://sourceforge.net/projects/mksqlite/">http://sourceforge.net/projects/mksqlite/</a>.</p><p><tt>RSKtools</tt> also provides some convenience functions for common data extraction (e.g. extracting profiles from a continuous dataset) and visualization (plotting individual profiles). For plans for future additions, see the Future plans section.</p><h2>Installing<a name="2"></a></h2><p>The latest stable version of <tt>RSKtools</tt> can be found at <a href="http://www.rbr-global.com/support/matlab-tools">http://www.rbr-global.com/support/matlab-tools</a>.</p><div><ul><li>Unzip the archive (to <tt>~/matlab/RSKtools</tt>, for instance)</li><li>Add the folder to your path inside matlab (<tt>addpath ~/matlab/RSKtools</tt> or some nifty GUI thing)</li><li>type <tt>help RSKtools</tt> to get an overview and take a look at the examples.</li></ul></div><h2>Examples of use<a name="3"></a></h2><p><h3>Loading files</h3></p><p>To work with an RSK file using <tt>RSKtools</tt>, a connection to the database must be made. This is done using the <tt>RSKopen()</tt> function. Note that <tt>RSKopen</tt> doesn't actually read the data, but reads a /thumbnail/ of the data which is typically about 4000 points long. The structure returned after opening an RSK looks something like:</p><pre class="codeinput">file = <span class="string">'../testfiles/065583_20140612_0739.rsk'</span>;
+rsk = RSKopen(file)
+</pre><pre class="codeoutput">mksqlite Version 1.12 build:34, an interface from MATLAB to SQLite
+(c) 2008-2011 by Martin Kortmann &lt;mail@kortmann.de&gt;
+based on SQLite Version 3.7.11 - http://www.sqlite.org
+UTF-8 extension: A.Martin, 2012-02-10, Volkswagen AG
+
+
+rsk = 
+
+                dbInfo: [1x1 struct]
+              datasets: [1x1 struct]
+    datasetDeployments: [1x1 struct]
+          calibrations: [5x1 struct]
+           instruments: [1x1 struct]
+    instrumentChannels: [3x1 struct]
+               ranging: [3x1 struct]
+     instrumentSensors: []
+              channels: [3x1 struct]
+                epochs: [1x1 struct]
+             schedules: [1x1 struct]
+           appSettings: [1x1 struct]
+           deployments: [1x1 struct]
+         thumbnailData: [1x1 struct]
+              profiles: [1x1 struct]
+
+</pre><p>Note the structure element called <tt>thumbnailData</tt>. In order to read the actual data, we use the <tt>RSKreaddata()</tt> function, which if given with one argument (the variable name of the RSK object) will read the entire data set. Because RSK files can store a large amount of data, it may be preferable to read a subset of the data, specified using a start and end time (in Matlab <tt>datenum</tt> format, which is defined as the number of days since January 0, 0000).</p><pre class="codeinput">t1 = rsk.thumbnailData.tstamp(1) + 0.5; <span class="comment">% half a day after start</span>
+t2 = rsk.thumbnailData.tstamp(1) + 1.5; <span class="comment">% 1.5 days after start</span>
+rsk = RSKreaddata(rsk, t1, t2);
+</pre><p>Note that the data structure can be found in the object at</p><pre class="codeinput">rsk.data
+</pre><pre class="codeoutput">
+ans = 
+
+      tstamp: [442293x1 double]
+      values: [442293x4 double]
+    longName: {'Conductivity'  'Temperature'  'Pressure'  'Salinity'}
+       units: {'mS/cm'  '&deg;C'  'dbar'  'PSU'}
+
+</pre><p>In this example, because the instrument was determined to be a "CTD"-type instrument, a new channel was created called <tt>Salinity</tt> (using the Practical Salinity Scale). The salinity calculation is performed by the <a href="http://teos-10.org/software.htm">TEOS-10</a>]] package, which can be obtained from <a href="http://teos-10.org/software.htm">http://teos-10.org/software.htm</a>.</p><h2>Working with profiles<a name="7"></a></h2><p>Profiling loggers with recent versions of firmware contain the ability to automatically detect and log profile "events". These are denoted as "downcasts" and "upcasts", and the function <tt>RSKreadprofiles()</tt> can be used to extract individual profiles from the raw data, based on the previously identified events. Following this, quick plots of the profiles can be made using the <tt>RSKplotprofiles()</tt> function.</p><pre class="codeinput">file = <span class="string">'../testfiles/065583_20140612_0739.rsk'</span>;
+rsk = RSKopen(file);
+
+<span class="comment">% load the first 10 profiles</span>
+rsk = RSKreadprofiles(rsk, 1:10);
+
+<span class="comment">% plot the downcasts</span>
+subplot(121)
+RSKplotprofiles(rsk, [], <span class="string">'temperature'</span>, <span class="string">'down'</span>)
+subplot(122)
+RSKplotprofiles(rsk, [], <span class="string">'salinity'</span>, <span class="string">'down'</span>)
+</pre><img vspace="5" hspace="5" src="RSKtools_vignette_01.png" alt=""> <h2>Future plans<a name="8"></a></h2><div><ul><li>Cast detection for datasets without profile events</li><li>Wave processing functions</li><li>Improved data processing functions (e.g. for CTD data)</li></ul></div><h2>About this document<a name="9"></a></h2><p>This document was created using <a href="http://www.mathworks.com/help/matlab/matlab_prog/marking-up-matlab-comments-for-publishing.html">Matlab&#8482; Markup Publishing</a>. To publish it as an HTML page, run the command:</p><pre class="language-matlab">publish(<span class="string">'RSKtools_vignette.m'</span>);
+</pre><p>See <tt>help publish</tt> for more document export options.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% RSKtools for Matlab access to RBR data
+% Clark Richards, PhD; 
+% clark.richards@rbr-global.com; 
+% RSKtools version 1.4; 
+% Updated 2016-04-05
+
+%% Introduction
+% RBR instruments output data in an open database format known as
+% <http://www.sqlite.org/famous.html SQLite>. To facilitate direct
+% access to the data in Matlab(TM), we created the |RSKtools|
+% toolbox. |RSKtools| facilitates direct access to the data stored in
+% |RSK| files by using the included |mksqlite| library, for which we
+% have provided versions compiled for Windows (32/64bit), Linux
+% (64bit) and Mac OSX (64bit). It may be necessary to compile your own
+% version, using the source code provided at
+% <http://sourceforge.net/projects/mksqlite/>.
+% 
+% |RSKtools| also provides some convenience functions for common data
+% extraction (e.g. extracting profiles from a continuous dataset) and
+% visualization (plotting individual profiles). For plans for future
+% additions, see the Future plans section.
+
+%% Installing
+% The latest stable version of |RSKtools| can be found at <http://www.rbr-global.com/support/matlab-tools>.
+% 
+% * Unzip the archive (to |~/matlab/RSKtools|, for instance)
+% * Add the folder to your path inside matlab (|addpath ~/matlab/RSKtools| or some nifty GUI thing)
+% * type |help RSKtools| to get an overview and take a look at the examples.
+
+  
+%% Examples of use
+% <html><h3>Loading files</h3></html>
+% 
+% To work with an RSK file using |RSKtools|, a connection to the
+% database must be made. This is done using the |RSKopen()|
+% function. Note that |RSKopen| doesn't actually read the data, but
+% reads a /thumbnail/ of the data which is typically about 4000 points
+% long. The structure returned after opening an RSK looks something
+% like:
+
+file = '../testfiles/065583_20140612_0739.rsk';
+rsk = RSKopen(file)
+
+%%
+% Note the structure element called |thumbnailData|. In order to read
+% the actual data, we use the |RSKreaddata()| function, which if given
+% with one argument (the variable name of the RSK object) will read
+% the entire data set. Because RSK files can store a large amount of
+% data, it may be preferable to read a subset of the data, specified
+% using a start and end time (in Matlab |datenum| format, which is
+% defined as the number of days since January 0, 0000).
+
+t1 = rsk.thumbnailData.tstamp(1) + 0.5; % half a day after start
+t2 = rsk.thumbnailData.tstamp(1) + 1.5; % 1.5 days after start
+rsk = RSKreaddata(rsk, t1, t2);
+
+%%
+% Note that the data structure can be found in the object at
+
+rsk.data        
+
+%% 
+% In this example, because the instrument was determined to be a
+% "CTD"-type instrument, a new channel was created called |Salinity|
+% (using the Practical Salinity Scale). The salinity calculation is
+% performed by the <http://teos-10.org/software.htm TEOS-10>]]
+% package, which can be obtained from
+% <http://teos-10.org/software.htm>.
+
+%% Working with profiles
+% Profiling loggers with recent versions of firmware contain the
+% ability to automatically detect and log profile "events". These are
+% denoted as "downcasts" and "upcasts", and the function
+% |RSKreadprofiles()| can be used to extract individual profiles from
+% the raw data, based on the previously identified events. Following
+% this, quick plots of the profiles can be made using the
+% |RSKplotprofiles()| function.
+
+file = '../testfiles/065583_20140612_0739.rsk';
+rsk = RSKopen(file);
+
+% load the first 10 profiles
+rsk = RSKreadprofiles(rsk, 1:10);
+
+% plot the downcasts
+subplot(121)
+RSKplotprofiles(rsk, [], 'temperature', 'down')
+subplot(122)
+RSKplotprofiles(rsk, [], 'salinity', 'down')
+
+%% Future plans
+% * Cast detection for datasets without profile events
+% * Wave processing functions
+% * Improved data processing functions (e.g. for CTD data)
+
+%% About this document
+% This document was created using
+% <http://www.mathworks.com/help/matlab/matlab_prog/marking-up-matlab-comments-for-publishing.html
+% Matlab(TM) Markup Publishing>. To publish it as an HTML page, run the
+% command:
+%%
+% 
+%   publish('RSKtools_vignette.m');
+
+%%
+% See |help publish| for more document export options.
+##### SOURCE END #####
+--></body></html>
