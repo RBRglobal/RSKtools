@@ -42,8 +42,10 @@ If the [TEOS-10](http://www.teos-10.org/software.htm) matlab toolbox is installe
 
 ## Changes
 
-* Developer Version (1.4.1)
+* Version 1.4.1 (2016-05-18)
 
+  - Add RSKreadwavetxt to handle import wave text exports	
+  - properly read "realtime" RSK files
   - don't plot hidden channels in profiles
   - Fix bug reading data table for RSK version >= 1.12.2
   - add info from `ranging` table to structure
