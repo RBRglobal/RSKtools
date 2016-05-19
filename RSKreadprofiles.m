@@ -89,6 +89,8 @@ end
 if strcmp(direction, 'up') | strcmp(direction, 'both')
     RSK.profiles.upcast.data(nup).tstamp = [];
     RSK.profiles.upcast.data(nup).values = [];
+    Schannel = find(strncmp('Salinity', {RSK.channels.longName}, 4));
+    RSK.channels(Schannel) = [];
     % loop through upcasts
     ii = 1;
     for i=profileNum

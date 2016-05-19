@@ -60,6 +60,14 @@ if sum(strcmp('datasetID', fieldnames(results))) > 0
 else 
     hasdatasetID = 0;
 end
+%% RSK version >= 1.12.2 also replaces serialID with instrumentID in the instrumentChannels table
+% Look for serialID (in older versions) and replace it
+if sum(strcmp('serialID', fieldnames(RSK.instrumentChannels))) > 0
+    ic = RSK.instrumentChannels;
+    [ic.instrumentID] = ic.serialID;
+    ic = rmfield(ic, 'serialID');
+    RSK.instrumentChannels = ic;
+end
 
 results = RSKarrangedata(results);
 
@@ -84,7 +92,7 @@ if hasTEOS & hasCTP & ~hasS
         RSK.channels(nchannels+1).longName = 'Salinity';
         RSK.channels(nchannels+1).units = 'PSU';
         % update the instrumentChannels info for the new "channel"
-        RSK.instrumentChannels(nchannels+1).serialID = RSK.instrumentChannels(1).serialID;
+        RSK.instrumentChannels(nchannels+1).instrumentID = RSK.instrumentChannels(1).instrumentID;
         RSK.instrumentChannels(nchannels+1).channelID = RSK.instrumentChannels(nchannels).channelID+1;
         RSK.instrumentChannels(nchannels+1).channelOrder = RSK.instrumentChannels(nchannels).channelOrder+1;
         if ~strncmp(RSK.dbInfo.type, 'EP', 2) RSK.instrumentChannels(nchannels+1).channelStatus = 0; end
