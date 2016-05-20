@@ -129,7 +129,7 @@ if exist('events', 'var')
         
         iup = find(events.values(:,2) == eventBeginUpcast);
         idown = find(events.values(:,2) == eventBeginDowncast);
-        iend = find(events.values(:,2) == evenEndcast);
+        iend = find(events.values(:,2) == eventEndcast);
         
         % which is first?
         if (idown(1) < iup(1)) 
