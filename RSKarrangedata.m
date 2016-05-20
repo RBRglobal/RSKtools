@@ -20,9 +20,9 @@ function data = RSKarrangedata(results_struct)
 %
 % See also: RSKreaddata, RSKreadevents, RSKreadburstdata, RSKreadthumbnail
 %
-% Author: RBR Global Inc. Ottawa ON, Canada
+% Author: RBR Ltd. Ottawa ON, Canada
 % email: support@rbr-global.com
-% Website: http://www.rbr-global.com
+% Website: www.rbr-global.com
 % Last revision: 2013-03-20
 
 s=struct2cell(results_struct);  % make it easier to deal with

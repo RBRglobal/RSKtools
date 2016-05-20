@@ -23,8 +23,8 @@ function dnum = unixtime2datenum(utime)
 %
 % See also: datenum2unixtime, RSKtime2datenum, datenum2RSKtime
 %
-% Author: RBR Global Inc. Ottawa ON, Canada
+% Author: RBR Ltd. Ottawa ON, Canada
 % email: support@rbr-global.com
-% Website: http://www.rbr-global.com
+% Website: www.rbr-global.com
 
 dnum = datenum(1970,1,1,0,0,utime)';

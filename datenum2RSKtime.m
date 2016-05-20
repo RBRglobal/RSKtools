@@ -23,8 +23,8 @@ function rtime = datenum2RSKtime(dnum)
 %
 % See also: RSKtime2datenum, unixtime2datenum, datenum2unixtime
 %
-% Author: RBR Global Inc. Ottawa ON, Canada
+% Author: RBR Ltd. Ottawa ON, Canada
 % email: support@rbr-global.com
-% Website: http://www.rbr-global.com
+% Website: www.rbr-global.com
 
 rtime=datenum2unixtime(dnum)*1000;

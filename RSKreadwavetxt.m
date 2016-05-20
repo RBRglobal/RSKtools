@@ -28,9 +28,9 @@ function [RBR] = RSKreadwavetxt(file)
 %    system('unzip 099999_20160517_1200.zip') % not necessary if already unzipped
 %    RBR = RSKreadwavetxt('099999_20160517_1200');
 %
-% Author: RBR Global Inc. Ottawa ON, Canada
+% Author: RBR Ltd. Ottawa ON, Canada
 % email: support@rbr-global.com
-% Website: http://www.rbr-global.com
+% Website: www.rbr-global.com
 % Last revision: 2016-05-17
 
 metadatafile = [file '/' file '_metadata.txt'];

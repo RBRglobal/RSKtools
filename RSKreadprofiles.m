@@ -45,9 +45,9 @@ function RSK = RSKreadprofiles(RSK, profileNum, direction)
 %
 % See also: RSKreaddata, RSKreadevents, RSKplotprofiles
 %
-% Author: RBR Global Inc. Ottawa ON, Canada
+% Author: RBR Ltd. Ottawa ON, Canada
 % email: support@rbr-global.com
-% Website: http://www.rbr-global.com
+% Website: www.rbr-global.com
 % Last revision: 2015-10-14
 
 if ~isfield(RSK, 'profiles') 

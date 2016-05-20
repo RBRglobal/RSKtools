@@ -19,9 +19,9 @@ function RSKplotburstdata(RSK)
 %
 % See also: RSKplotthumbnail, RSKplotdata, RSKreadburstdata
 %
-% Author: RBR Global Inc. Ottawa ON, Canada
+% Author: RBR Ltd. Ottawa ON, Canada
 % email: support@rbr-global.com
-% Website: http://www.rbr-global.com
+% Website: www.rbr-global.com
 
 % FIXMEs:
 % * plot data - needs time axis sorting
