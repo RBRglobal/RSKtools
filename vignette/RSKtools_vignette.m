@@ -38,7 +38,7 @@
 % long. The structure returned after opening an RSK looks something
 % like:
 
-file = '../testfiles/065583_20140612_0739.rsk';
+file = '../testfiles/065583_20140612_0739_v1_12_2.rsk';
 rsk = RSKopen(file)
 
 %%
@@ -76,7 +76,7 @@ rsk.data
 % this, quick plots of the profiles can be made using the
 % |RSKplotprofiles()| function.
 
-file = '../testfiles/065583_20140612_0739.rsk';
+file = '../testfiles/065583_20140612_0739_v1_12_2.rsk';
 rsk = RSKopen(file);
 
 % load the first 10 profiles
