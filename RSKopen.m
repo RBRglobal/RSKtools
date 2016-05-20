@@ -35,7 +35,12 @@ function [RSK, dbid] = RSKopen(fname)
 % Author: RBR Global Inc. Ottawa ON, Canada
 % email: support@rbr-global.com
 % Website: http://www.rbr-global.com
-% Last revision: 2015-10-06
+% Last revision: 2016-05-16
+
+latestRSKversion = '1.12.2';
+latestRSKversionMajor = 1;
+latestRSKversionMinor = 12;
+latestRSKversionPatch = 2;
 
 if nargin==0
     fname=uigetfile({'*.rsk','*.RSK'},'Choose an RSK file');
@@ -48,6 +53,18 @@ end
 dbid = mksqlite('open',fname);
 
 RSK.dbInfo = mksqlite('select version,type from dbInfo');
+vsnString = RSK.dbInfo.version;
+vsn = strsplit(vsnString, '.');
+vsnMajor = str2num(vsn{1});
+vsnMinor = str2num(vsn{2});
+vsnPatch = str2num(vsn{3});
+if vsnMajor > latestRSKversionMajor
+    warning(['RSK version ' vsnString ' is newer than your RSKtools version. It is recommended to update RSKtools at https://rbr-global.com/support/matlab-tools']);
+elseif (vsnMajor == latestRSKversionMajor) & (vsnMinor > latestRSKversionMinor)
+    warning(['RSK version ' vsnString ' is newer than your RSKtools version. It is recommended to update RSKtools at https://rbr-global.com/support/matlab-tools']);
+elseif (vsnMajor == latestRSKversionMajor) & (vsnMinor == latestRSKversionMinor) & (vsnPatch > latestRSKversionPatch)
+    warning(['RSK version ' vsnString ' is newer than your RSKtools version. It is recommended to update RSKtools at https://rbr-global.com/support/matlab-tools']);
+end
 
 RSK.datasets = mksqlite('select * from datasets');
 RSK.datasetDeployments = mksqlite('select * from datasetDeployments');

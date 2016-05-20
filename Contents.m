@@ -67,8 +67,8 @@
 %   RSKplotprofiles    - plot profiles
 %   RSKreadburstdata   - 
 %   RSKplotburstdata   - plot burst data - needs time axis sorting
-%   RSKreadevents      
-
+%   RSKreadevents      -
+%
 %
 % Helper files
 %   mksqlite           - The library for SQLite files (the .RSK file format)

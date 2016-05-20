@@ -111,13 +111,13 @@ if ~strncmp(RSK.dbInfo.type, 'EP', 2)
 end
 
 % clf
-hold on
 ax = gca; ax.ColorOrderIndex = 1;
 pmax = 0;
 if strcmp(direction, 'up') | strcmp(direction, 'both')
     for i=profileNum
         p = RSK.profiles.upcast.data(i).values(:, pcol) - 10.1325; % FIXME: should read ptAm from rskfile
         plot(RSK.profiles.upcast.data(i).values(:, col), p)
+        hold on
         pmax = max([pmax; p]);
     end
 end
@@ -126,6 +126,7 @@ if strcmp(direction, 'down') | strcmp(direction, 'both')
     for i=profileNum
         p = RSK.profiles.downcast.data(i).values(:, pcol) - 10.1325; % FIXME: should read pAtm from rskfile
         plot(RSK.profiles.downcast.data(i).values(:, col), p)
+        hold on
         pmax = max([pmax; p]);
     end
 end
