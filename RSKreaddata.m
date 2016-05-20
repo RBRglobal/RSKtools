@@ -43,6 +43,10 @@ else
     t1 = datenum2RSKtime(t1);
     t2 = datenum2RSKtime(t2);
 end
+
+% Select data schema
+% Determine 'channelXX' column names
+% Build SQL statement from column names
 sql = ['select tstamp/1.0 as tstamp,* from data where tstamp/1.0 between ' num2str(t1) ' and ' num2str(t2) ' order by tstamp'];
 results = mksqlite(sql);
 if isempty(results)
@@ -53,7 +57,7 @@ results = rmfield(results,'tstamp_1'); % get rid of the corrupted one
 
 %% RSK version >= 1.12.2 now has a datasetID column in the data table
 % Look for the presence of that column and extract it from results
-if sum(strcmp('datasetID', fieldnames(results))) > 0
+if isfield(results, 'datasetID')
     datasetID = [results(:).datasetID]';
     results = rmfield(results, 'datasetID'); % get rid of the datasetID column
     hasdatasetID = 1;
@@ -103,7 +107,7 @@ if hasTEOS & hasCTP & ~hasS
     results.values = [results.values salinity];
 end
 
-if hasdatasetID
-    results.datasetID = datasetID;
-end
+% if hasdatasetID
+%     results.datasetID = datasetID;
+% end
 RSK.data=results;
