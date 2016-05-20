@@ -1,11 +1,5 @@
 % RSKTOOLS
-% version 1.4 2015-11-30
-% 
-% History:
-% version 1.4 changes: add support for profile events and profile plotting
-% version 1.3 changes: compatible with RSK generated from an EasyParse (iOs format) logger
-% version 1.2 changes: added linux 64 bit mksqlite library
-% version 1.1 changes: added burst and event readers
+% Version 1.4.1 2016-05-20
 %
 % 1.  This toolbox depends on the presence of a functional mksqlite
 % library.  We have included a couple of versions here for Windows (32 bit/ 64 bit), Linux (64 bit)
