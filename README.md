@@ -42,7 +42,7 @@ If the [TEOS-10](http://www.teos-10.org/software.htm) matlab toolbox is installe
 
 ## Changes
 
-* Version 1.4.1 (2016-05-18)
+* Version 1.4.1 (2016-05-20)
 
   - Add RSKreadwavetxt to handle import wave text exports	
   - properly read "realtime" RSK files
