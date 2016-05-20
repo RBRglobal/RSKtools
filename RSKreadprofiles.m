@@ -10,7 +10,8 @@ function RSK = RSKreadprofiles(RSK, profileNum, direction)
 % structure array, divided into upcast and downcast fields, which can
 % be indexed individually.
 %
-% The profile events are parsed from the events table using the following types:
+% The profile events are parsed from the events table using the
+% following types (see RSKconstants.m):
 %   33 - Begin upcast
 %   34 - Begin downcast
 %   35 - End of profile cast

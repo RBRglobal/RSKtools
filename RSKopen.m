@@ -37,10 +37,7 @@ function [RSK, dbid] = RSKopen(fname)
 % Website: www.rbr-global.com
 % Last revision: 2016-05-16
 
-latestRSKversion = '1.12.2';
-latestRSKversionMajor = 1;
-latestRSKversionMinor = 12;
-latestRSKversionPatch = 2;
+RSKconstants
 
 if nargin==0
     fname=uigetfile({'*.rsk','*.RSK'},'Choose an RSK file');
@@ -125,14 +122,14 @@ catch
 end
 
 if exist('events', 'var')
-    nup = length(find(events.values(:,2) == 33));
-    ndown = length(find(events.values(:,2) == 34));
+    nup = length(find(events.values(:,2) == eventBeginUpcast));
+    ndown = length(find(events.values(:,2) == eventBeginDowncast));
     
     if ~(nup == 0 & ndown == 0)
         
-        iup = find(events.values(:,2) == 33);
-        idown = find(events.values(:,2) == 34);
-        iend = find(events.values(:,2) == 35);
+        iup = find(events.values(:,2) == eventBeginUpcast);
+        idown = find(events.values(:,2) == eventBeginDowncast);
+        iend = find(events.values(:,2) == evenEndcast);
         
         % which is first?
         if (idown(1) < iup(1)) 
